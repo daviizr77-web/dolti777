@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<body style="background:#0f172a;color:white;text-align:center">
+
+<h1>🔥 Cassino</h1>
+
+<input id="email" placeholder="email"><br><br>
+<input id="senha" placeholder="senha"><br><br>
+
+<button onclick="register()">Cadastrar</button>
+<button onclick="login()">Login</button>
+
+<h2 id="saldo"></h2>
+
+<button onclick="apostar()">Apostar</button>
+
+<script>
+let user;
+const API = "COLOCAR_BACKEND_AQUI";
+
+async function register(){
+ await fetch(API+"/register",{method:"POST",
+ headers:{"Content-Type":"application/json"},
+ body:JSON.stringify({email:email.value,senha:senha.value})});
+ alert("ok");
+}
+
+async function login(){
+ let r = await fetch(API+"/login",{method:"POST",
+ headers:{"Content-Type":"application/json"},
+ body:JSON.stringify({email:email.value,senha:senha.value})});
+ user = await r.json();
+ saldo.innerText = user.saldo;
+}
+
+async function apostar(){
+ let r = await fetch(API+"/bet",{method:"POST",
+ headers:{"Content-Type":"application/json"},
+ body:JSON.stringify({userId:user.id,valor:10,cashout:2})});
+ let d = await r.json();
+ saldo.innerText = d.saldo;
+}
+</script>
+
+</body>
+</html>

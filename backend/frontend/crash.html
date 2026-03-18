@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<body style="background:#0b0f1a;color:white;text-align:center">
+
+<h1>🚀 Crash</h1>
+<h2 id="multi">1.00x</h2>
+
+<button onclick="apostar()">APOSTAR</button>
+<button onclick="cashout()">CASHOUT</button>
+
+<script>
+let rodando=false;
+let atual=1;
+let alvo=0;
+let intervalo;
+
+function apostar(){
+ if(rodando) return;
+
+ rodando=true;
+ atual=1;
+ alvo = Math.random()*5+1;
+
+ intervalo = setInterval(()=>{
+   atual += 0.03;
+   multi.innerText = atual.toFixed(2)+"x";
+
+   if(atual >= alvo){
+     clearInterval(intervalo);
+     rodando=false;
+     alert("Perdeu 💥");
+   }
+ },30);
+}
+
+function cashout(){
+ if(!rodando) return;
+
+ clearInterval(intervalo);
+ rodando=false;
+
+ let ganho = (atual*10).toFixed(2);
+ alert("Ganhou: "+ganho);
+}
+</script>
+
+</body>
+</html>

@@ -1,84 +1,55 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<title>Cassino PRO</title>
-
 <style>
-body{
- margin:0;
- background:#0b0f1a;
- color:white;
- font-family:Arial;
-}
+body{margin:0;background:#0b0f1a;color:white;font-family:Arial;}
 
-.sidebar{
- position:fixed;
- width:200px;
- height:100%;
+.topo{
+ display:flex;
+ justify-content:space-between;
+ padding:15px;
  background:#111827;
- padding:20px;
-}
-
-.sidebar h2{
- margin-bottom:20px;
-}
-
-.sidebar div{
- margin:10px 0;
- cursor:pointer;
-}
-
-.main{
- margin-left:220px;
- padding:20px;
 }
 
 .grid{
  display:grid;
- grid-template-columns: repeat(3, 1fr);
- gap:20px;
+ grid-template-columns: repeat(2,1fr);
+ gap:15px;
+ padding:15px;
 }
 
 .card{
  background:#1f2937;
- padding:30px;
+ padding:20px;
  border-radius:10px;
  text-align:center;
  cursor:pointer;
- transition:0.3s;
-}
-
-.card:hover{
- transform:scale(1.05);
- background:#374151;
 }
 </style>
 </head>
 
 <body>
 
-<div class="sidebar">
-  <h2>🎰 DOLT77</h2>
-  <div onclick="ir('crash.html')">🚀 Crash</div>
-  <div onclick="ir('roleta.html')">🎡 Roleta</div>
-  <div onclick="ir('slot.html')">🎰 Slots</div>
+<div class="topo">
+ <div>🎰 Cassino</div>
+ <div id="saldo"></div>
 </div>
 
-<div class="main">
-  <h1>Jogos</h1>
-
-  <div class="grid">
-    <div class="card" onclick="ir('crash.html')">🚀 Crash</div>
-    <div class="card" onclick="ir('roleta.html')">🎡 Roleta</div>
-    <div class="card" onclick="ir('slot.html')">🎰 Slots</div>
-  </div>
+<div class="grid">
+ <div class="card" onclick="ir('crash.html')">🚀 Crash</div>
+ <div class="card" onclick="ir('carteira.html')">💸 Carteira</div>
 </div>
 
 <script>
-function ir(p){
- window.location = p;
+let user = JSON.parse(localStorage.getItem("user"));
+
+if(!user){
+ window.location="login.html";
 }
+
+saldo.innerText="Saldo: "+user.saldo;
+
+function ir(p){window.location=p;}
 </script>
 
 </body>

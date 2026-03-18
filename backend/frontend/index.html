@@ -1,8 +1,16 @@
 <!DOCTYPE html>
 <html>
 <head>
+<meta charset="UTF-8">
+<title>Cassino</title>
+
 <style>
-body{margin:0;background:#0b0f1a;color:white;font-family:Arial;}
+body{
+ margin:0;
+ background:#0b0f1a;
+ color:white;
+ font-family:Arial;
+}
 
 .topo{
  display:flex;
@@ -21,9 +29,26 @@ body{margin:0;background:#0b0f1a;color:white;font-family:Arial;}
 .card{
  background:#1f2937;
  padding:20px;
- border-radius:10px;
+ border-radius:12px;
  text-align:center;
+ font-size:18px;
  cursor:pointer;
+ transition:0.2s;
+}
+
+.card:hover{
+ transform:scale(1.05);
+ background:#374151;
+}
+
+.bottom{
+ position:fixed;
+ bottom:0;
+ width:100%;
+ background:#111827;
+ display:flex;
+ justify-content:space-around;
+ padding:10px;
 }
 </style>
 </head>
@@ -37,16 +62,18 @@ body{margin:0;background:#0b0f1a;color:white;font-family:Arial;}
 
 <div class="grid">
  <div class="card" onclick="ir('crash.html')">🚀 Crash</div>
- <div class="card" onclick="ir('carteira.html')">💸 Carteira</div>
+ <div class="card" onclick="ir('roleta.html')">🎡 Roleta</div>
+ <div class="card" onclick="ir('slot.html')">🎰 Slot</div>
+ <div class="card" onclick="ir('dice.html')">🎲 Dice</div>
+</div>
+
+<div class="bottom">
+ <div onclick="ir('index.html')">🏠</div>
+ <div onclick="ir('carteira.html')">💸</div>
 </div>
 
 <script>
 let user = JSON.parse(localStorage.getItem("user"));
-
-if(!user){
- window.location="login.html";
-}
-
 saldo.innerText="Saldo: "+user.saldo;
 
 function ir(p){window.location=p;}

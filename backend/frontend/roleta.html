@@ -1,16 +1,22 @@
 <!DOCTYPE html>
 <html>
-<body style="background:black;color:white;text-align:center">
+<body style="background:#0b0f1a;color:white;text-align:center">
 
 <h1>🎡 Roleta</h1>
-<h2 id="resultado">--</h2>
+<h2 id="num">--</h2>
 
-<button onclick="girar()">GIRAR</button>
+<button onclick="jogar()">GIRAR</button>
 
 <script>
-function girar(){
- let n = Math.floor(Math.random()*36);
- resultado.innerText = "Número: " + n;
+function jogar(){
+ let n = Math.floor(Math.random()*37);
+ num.innerText = n;
+
+ if(n % 2 === 0){
+   alert("Preto");
+ } else {
+   alert("Vermelho");
+ }
 }
 </script>
 

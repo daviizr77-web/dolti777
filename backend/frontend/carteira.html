@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<body style="background:#0b0f1a;color:white;text-align:center">
+
+<h1>💸 Carteira</h1>
+<h2 id="saldo"></h2>
+
+<input id="valor" placeholder="Valor"><br><br>
+
+<button onclick="depositar()">Depositar</button>
+<button onclick="sacar()">Sacar</button>
+
+<script>
+let user = JSON.parse(localStorage.getItem("user"));
+
+saldo.innerText="Saldo: "+user.saldo;
+
+function salvar(){
+ localStorage.setItem("user", JSON.stringify(user));
+ saldo.innerText="Saldo: "+user.saldo;
+}
+
+function depositar(){
+ user.saldo += Number(valor.value);
+ salvar();
+}
+
+function sacar(){
+ user.saldo -= Number(valor.value);
+ salvar();
+}
+</script>
+
+</body>
+</html>

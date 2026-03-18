@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<body style="background:black;color:white;text-align:center">
+
+<h1>🎰 Slot</h1>
+<h2 id="res">---</h2>
+
+<button onclick="jogar()">SPIN</button>
+
+<script>
+function jogar(){
+ let simbolos = ["🍒","💎","7️⃣"];
+ let r = [
+   simbolos[Math.floor(Math.random()*3)],
+   simbolos[Math.floor(Math.random()*3)],
+   simbolos[Math.floor(Math.random()*3)]
+ ];
+
+ res.innerText = r.join(" ");
+
+ if(r[0]==r[1] && r[1]==r[2]){
+   alert("GANHOU!");
+ }
+}
+</script>
+
+</body>
+</html>

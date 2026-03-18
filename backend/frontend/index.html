@@ -2,33 +2,47 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>DOLT77</title>
+<title>Cassino PRO</title>
 
 <style>
 body{
+ margin:0;
  background:#0b0f1a;
  color:white;
  font-family:Arial;
- margin:0;
 }
 
-.topo{
- padding:20px;
+.sidebar{
+ position:fixed;
+ width:200px;
+ height:100%;
  background:#111827;
- text-align:center;
- font-size:22px;
+ padding:20px;
+}
+
+.sidebar h2{
+ margin-bottom:20px;
+}
+
+.sidebar div{
+ margin:10px 0;
+ cursor:pointer;
+}
+
+.main{
+ margin-left:220px;
+ padding:20px;
 }
 
 .grid{
  display:grid;
- grid-template-columns: repeat(2, 1fr);
+ grid-template-columns: repeat(3, 1fr);
  gap:20px;
- padding:20px;
 }
 
 .card{
  background:#1f2937;
- padding:20px;
+ padding:30px;
  border-radius:10px;
  text-align:center;
  cursor:pointer;
@@ -37,24 +51,33 @@ body{
 
 .card:hover{
  transform:scale(1.05);
+ background:#374151;
 }
 </style>
 </head>
 
 <body>
 
-<div class="topo">🎰 DOLT77</div>
+<div class="sidebar">
+  <h2>🎰 DOLT77</h2>
+  <div onclick="ir('crash.html')">🚀 Crash</div>
+  <div onclick="ir('roleta.html')">🎡 Roleta</div>
+  <div onclick="ir('slot.html')">🎰 Slots</div>
+</div>
 
-<div class="grid">
-  <div class="card" onclick="ir('crash.html')">🚀 Crash</div>
-  <div class="card" onclick="ir('roleta.html')">🎡 Roleta</div>
-  <div class="card" onclick="ir('slot.html')">🎰 Slot</div>
-  <div class="card" onclick="ir('admin.html')">👑 Admin</div>
+<div class="main">
+  <h1>Jogos</h1>
+
+  <div class="grid">
+    <div class="card" onclick="ir('crash.html')">🚀 Crash</div>
+    <div class="card" onclick="ir('roleta.html')">🎡 Roleta</div>
+    <div class="card" onclick="ir('slot.html')">🎰 Slots</div>
+  </div>
 </div>
 
 <script>
-function ir(pagina){
- window.location = pagina;
+function ir(p){
+ window.location = p;
 }
 </script>
 

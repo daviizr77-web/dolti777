@@ -1,116 +1,102 @@
 <!DOCTYPE html>
-<html lang="pt">
+<html>
 <head>
 <meta charset="UTF-8">
-<title>Cassino</title>
+<title>DOLT77</title>
 
 <style>
 body{
-  margin:0;
-  background:#0b0f1a;
-  color:white;
-  font-family:Arial;
-  text-align:center;
+ margin:0;
+ background:#0b0f1a;
+ color:white;
+ font-family:Arial;
+ text-align:center;
 }
 
 .topo{
-  padding:20px;
-  font-size:24px;
-  font-weight:bold;
-}
-
-.box{
-  background:#111827;
-  padding:20px;
-  border-radius:10px;
-  width:300px;
-  margin:auto;
-}
-
-input{
-  width:90%;
-  padding:10px;
-  margin:5px;
-  border:none;
-  border-radius:5px;
-}
-
-button{
-  padding:10px;
-  margin:5px;
-  border:none;
-  border-radius:5px;
-  background:#22c55e;
-  color:white;
-  cursor:pointer;
+ padding:20px;
+ background:#111827;
+ font-size:22px;
 }
 
 .crash{
-  margin-top:40px;
-  font-size:40px;
-  font-weight:bold;
+ font-size:60px;
+ margin-top:50px;
 }
+
+button{
+ padding:12px;
+ margin:10px;
+ border:none;
+ border-radius:6px;
+ cursor:pointer;
+ font-size:16px;
+}
+
+.apostar{ background:#22c55e; }
+.cashout{ background:#ef4444; }
 
 </style>
 </head>
 
 <body>
 
-<div class="topo"> Dolt77</div>
+<div class="topo">DOLT77</div>
 
-<div class="box">
-<input id="email" placeholder="Email"><br>
-<input id="senha" placeholder="Senha"><br>
-
-<button onclick="register()">Cadastrar</button>
-<button onclick="login()">Login</button>
-
-<h2 id="saldo"></h2>
-</div>
+<h2 id="saldo">Saldo: --</h2>
 
 <div class="crash" id="crash">1.00x</div>
 
-<button onclick="apostar()">APOSTAR</button>
+<button class="apostar" onclick="apostar()">APOSTAR</button>
+<button class="cashout" onclick="cashout()">CASHOUT</button>
 
 <script>
-let user;
-const API = "https://dolti777.onrender.com";
+let user = { id: 1, saldo: 100 };
+let rodando = false;
+let crashFinal = 0;
+let atual = 1;
+let intervalo;
 
-function animarCrash(valor){
-  let atual = 1;
-  let intervalo = setInterval(()=>{
-    atual += 0.05;
-    crash.innerText = atual.toFixed(2) + "x";
-    if(atual >= valor){
-      clearInterval(intervalo);
-    }
-  },50);
+saldo.innerText = "Saldo: " + user.saldo;
+
+function iniciarRodada(){
+ atual = 1;
+ crash.innerText = "1.00x";
+
+ crashFinal = (Math.random()*5)+1;
+ rodando = true;
+
+ intervalo = setInterval(()=>{
+   atual += 0.02;
+   crash.innerText = atual.toFixed(2)+"x";
+
+   if(atual >= crashFinal){
+     clearInterval(intervalo);
+     rodando = false;
+   }
+ },30);
 }
 
-async function register(){
- await fetch(API+"/register",{method:"POST",
- headers:{"Content-Type":"application/json"},
- body:JSON.stringify({email:email.value,senha:senha.value})});
- alert("Conta criada");
+function apostar(){
+ if(rodando) return;
+
+ user.aposta = 10;
+ user.saldo -= 10;
+ saldo.innerText = "Saldo: " + user.saldo;
+
+ iniciarRodada();
 }
 
-async function login(){
- let r = await fetch(API+"/login",{method:"POST",
- headers:{"Content-Type":"application/json"},
- body:JSON.stringify({email:email.value,senha:senha.value})});
- user = await r.json();
- saldo.innerText = "Saldo: "+user.saldo;
-}
+function cashout(){
+ if(!rodando) return;
 
-async function apostar(){
- let r = await fetch(API+"/bet",{method:"POST",
- headers:{"Content-Type":"application/json"},
- body:JSON.stringify({userId:user.id,valor:10,cashout:2})});
+ clearInterval(intervalo);
+ rodando = false;
 
- let d = await r.json();
+ let ganho = user.aposta * atual;
+ user.saldo += ganho;
 
- animarCrash(d.crash);
- saldo.innerText = "Saldo: "+d.saldo;
+ saldo.innerText = "Saldo: " + user.saldo;
 }
 </script>
 

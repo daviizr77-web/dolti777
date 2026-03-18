@@ -6,97 +6,55 @@
 
 <style>
 body{
- margin:0;
  background:#0b0f1a;
  color:white;
  font-family:Arial;
- text-align:center;
+ margin:0;
 }
 
 .topo{
  padding:20px;
  background:#111827;
+ text-align:center;
  font-size:22px;
 }
 
-.crash{
- font-size:60px;
- margin-top:50px;
+.grid{
+ display:grid;
+ grid-template-columns: repeat(2, 1fr);
+ gap:20px;
+ padding:20px;
 }
 
-button{
- padding:12px;
- margin:10px;
- border:none;
- border-radius:6px;
+.card{
+ background:#1f2937;
+ padding:20px;
+ border-radius:10px;
+ text-align:center;
  cursor:pointer;
- font-size:16px;
+ transition:0.3s;
 }
 
-.apostar{ background:#22c55e; }
-.cashout{ background:#ef4444; }
-
+.card:hover{
+ transform:scale(1.05);
+}
 </style>
 </head>
 
 <body>
 
-<div class="topo">🔥 Cassino PRO</div>
+<div class="topo">🎰 Cassino PRO</div>
 
-<h2 id="saldo">Saldo: --</h2>
-
-<div class="crash" id="crash">1.00x</div>
-
-<button class="apostar" onclick="apostar()">APOSTAR</button>
-<button class="cashout" onclick="cashout()">CASHOUT</button>
+<div class="grid">
+  <div class="card" onclick="ir('crash.html')">🚀 Crash</div>
+  <div class="card" onclick="ir('roleta.html')">🎡 Roleta</div>
+  <div class="card" onclick="ir('slot.html')">🎰 Slot</div>
+  <div class="card" onclick="ir('admin.html')">👑 Admin</div>
+</div>
 
 <script>
-let user = { id: 1, saldo: 100 };
-let rodando = false;
-let crashFinal = 0;
-let atual = 1;
-let intervalo;
-
-saldo.innerText = "Saldo: " + user.saldo;
-
-function iniciarRodada(){
- atual = 1;
- crash.innerText = "1.00x";
-
- crashFinal = (Math.random()*5)+1;
- rodando = true;
-
- intervalo = setInterval(()=>{
-   atual += 0.02;
-   crash.innerText = atual.toFixed(2)+"x";
-
-   if(atual >= crashFinal){
-     clearInterval(intervalo);
-     rodando = false;
-   }
- },30);
-}
-
-function apostar(){
- if(rodando) return;
-
- user.aposta = 10;
- user.saldo -= 10;
- saldo.innerText = "Saldo: " + user.saldo;
-
- iniciarRodada();
-}
-
-function cashout(){
- if(!rodando) return;
-
- clearInterval(intervalo);
- rodando = false;
-
- let ganho = user.aposta * atual;
- user.saldo += ganho;
-
- saldo.innerText = "Saldo: " + user.saldo;
+function ir(pagina){
+ window.location = pagina;
 }
 </script>
 
